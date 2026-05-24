@@ -9,8 +9,17 @@ warn()  { echo -e "\033[1;33m[WARN]\033[0m  $*"; }
 
 # ─── System packages ─────────────────────────────────────────────────────────
 info "Installing system packages..."
-sudo pacman -S --needed --noconfirm stow fzf eza zoxide base-devel curl wget git ttf-jetbrains-mono-nerd
+sudo pacman -S --needed --noconfirm \
+  stow fzf eza zoxide base-devel curl wget git \
+  ttf-jetbrains-mono-nerd \
+  docker docker-compose kubectl helm k9s \
+  ripgrep bat fd github-cli lazygit git-delta
 ok "System packages ready"
+
+info "Enabling Docker..."
+sudo systemctl enable docker
+sudo usermod -aG docker "$USER"
+ok "Docker enabled (reboot required to use without sudo)"
 
 # ─── Performance tweaks ──────────────────────────────────────────────────────
 info "Applying sysctl performance tweaks..."

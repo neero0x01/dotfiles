@@ -27,8 +27,11 @@ setopt HIST_IGNORE_SPACE SHARE_HISTORY AUTO_CD
 
 # ─── fzf ─────────────────────────────────────────────────────────────────────
 eval "$(fzf --zsh)"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --bind='ctrl-/:toggle-preview'"
-export FZF_CTRL_T_OPTS="--preview 'eza --color=always --icons=always {}'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:200 {}'"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always --icons=always {}'"
 
 # ─── zoxide ──────────────────────────────────────────────────────────────────
@@ -78,6 +81,22 @@ export PATH="$PNPM_HOME:$PATH"
 
 # ─── PATH ────────────────────────────────────────────────────────────────────
 export PATH="$HOME/.local/bin:$PATH"
+
+# ─── bat ─────────────────────────────────────────────────────────────────────
+export BAT_THEME="Catppuccin Mocha"
+alias cat='bat --paging=never'
+alias catt='/usr/bin/cat'
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
+
+# ─── ripgrep ─────────────────────────────────────────────────────────────────
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
+
+# ─── lazygit ─────────────────────────────────────────────────────────────────
+alias lg='lazygit'
+
+# ─── gh ──────────────────────────────────────────────────────────────────────
+command -v gh &>/dev/null && eval "$(gh completion -s zsh)"
 
 # ─── Dynamic completions ─────────────────────────────────────────────────────
 command -v kubectl &>/dev/null && source <(kubectl completion zsh)

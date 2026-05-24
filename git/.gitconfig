@@ -6,6 +6,7 @@
 	excludesfile = ~/.config/git/ignore
 	editor = code --wait
 	autocrlf = input
+	pager = delta
 
 [init]
 	defaultBranch = main
@@ -19,8 +20,18 @@
 [rebase]
 	autoStash = true
 
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = Catppuccin Mocha
+
 [diff]
 	tool = vscode
+	colorMoved = default
 
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
