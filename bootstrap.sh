@@ -45,6 +45,40 @@ info "Setting power profile to balanced..."
 powerprofilesctl set balanced
 ok "Power profile: balanced"
 
+# ─── Mirrors ─────────────────────────────────────────────────────────────────
+info "Optimizing pacman mirrors..."
+sudo pacman-mirrors --fasttrack 5 && sudo pacman -Syy
+ok "Mirrors optimized"
+
+if [[ ! -f /etc/systemd/system/pacman-mirrors-update.timer ]]; then
+  sudo tee /etc/systemd/system/pacman-mirrors-update.service > /dev/null << 'UNIT'
+[Unit]
+Description=Update pacman mirrorlist with fastest mirrors
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pacman-mirrors --fasttrack 5
+ExecStartPost=/usr/bin/pacman -Syy
+UNIT
+
+  sudo tee /etc/systemd/system/pacman-mirrors-update.timer > /dev/null << 'UNIT'
+[Unit]
+Description=Monthly pacman mirror refresh
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+UNIT
+
+  sudo systemctl enable --now pacman-mirrors-update.timer
+  ok "Monthly mirror refresh timer enabled"
+fi
+
 # ─── mise (Node + Python) ────────────────────────────────────────────────────
 if ! command -v mise &>/dev/null && [[ ! -f "$HOME/.local/bin/mise" ]]; then
   info "Installing mise..."
