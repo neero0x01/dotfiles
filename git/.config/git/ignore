@@ -1,0 +1,47 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets / env
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# Java
+*.class
+*.jar
+target/
+
+# IDEs
+.idea/
+*.iml
+.vscode/extensions.json
+
+# Mise local overrides
+.mise.local.toml
+
+# Misc
+*.bak
+*.swp
+.direnv/

@@ -1,0 +1,89 @@
+# ─── Zinit ───────────────────────────────────────────────────────────────────
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[[ ! -d $ZINIT_HOME ]] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# ─── Plugins ─────────────────────────────────────────────────────────────────
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light Aloxaf/fzf-tab
+
+# ─── Completions ─────────────────────────────────────────────────────────────
+autoload -Uz compinit
+compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+
+# fzf-tab must be loaded after compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always --icons=always $realpath'
+zstyle ':fzf-tab:complete:z:*'  fzf-preview 'eza --color=always --icons=always $realpath'
+
+# ─── History ─────────────────────────────────────────────────────────────────
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE SHARE_HISTORY AUTO_CD
+
+# ─── fzf ─────────────────────────────────────────────────────────────────────
+eval "$(fzf --zsh)"
+export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --bind='ctrl-/:toggle-preview'"
+export FZF_CTRL_T_OPTS="--preview 'eza --color=always --icons=always {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always --icons=always {}'"
+
+# ─── zoxide ──────────────────────────────────────────────────────────────────
+eval "$(zoxide init zsh --cmd cd)"
+
+# ─── mise ────────────────────────────────────────────────────────────────────
+eval "$($HOME/.local/bin/mise activate zsh)"
+
+# ─── Starship ────────────────────────────────────────────────────────────────
+eval "$(starship init zsh)"
+
+# ─── eza ─────────────────────────────────────────────────────────────────────
+alias ls='eza --color=always --icons=always'
+alias ll='eza -la --color=always --icons=always --git'
+alias la='eza -a --color=always --icons=always'
+alias lt='eza --tree --color=always --icons=always --git -L 2'
+alias l='eza -l --color=always --icons=always --git'
+
+# ─── git ─────────────────────────────────────────────────────────────────────
+alias gst='git status'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gp='git push'
+alias gpl='git pull --rebase'
+alias ga='git add'
+alias gaa='git add -A'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias glog='git log --oneline --graph --decorate'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gsw='git switch'
+alias gsc='git switch -c'
+alias grb='git rebase'
+alias grs='git restore'
+
+# ─── docker ──────────────────────────────────────────────────────────────────
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias dimg='docker images'
+alias dex='docker exec -it'
+alias dlogs='docker logs -f'
+
+# ─── pnpm ────────────────────────────────────────────────────────────────────
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+# ─── PATH ────────────────────────────────────────────────────────────────────
+export PATH="$HOME/.local/bin:$PATH"
+
+# ─── Dynamic completions ─────────────────────────────────────────────────────
+command -v kubectl &>/dev/null && source <(kubectl completion zsh)
+command -v docker  &>/dev/null && source <(docker completion zsh)
+command -v helm    &>/dev/null && source <(helm completion zsh)
+
+# ─── sdkman (must remain last) ───────────────────────────────────────────────
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

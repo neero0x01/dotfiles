@@ -1,0 +1,41 @@
+[user]
+	name = Muhammad Ahmad
+	email = m.ahmad00861@gmail.com
+
+[core]
+	excludesfile = ~/.config/git/ignore
+	editor = code --wait
+	autocrlf = input
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+
+[rebase]
+	autoStash = true
+
+[diff]
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[merge]
+	tool = vscode
+	conflictstyle = diff3
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+
+[alias]
+	lg = log --oneline --graph --decorate --all
+	undo = reset HEAD~1 --mixed
+	aliases = config --get-regexp alias
+
+[color]
+	ui = auto

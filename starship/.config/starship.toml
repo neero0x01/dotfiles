@@ -1,0 +1,68 @@
+format = """
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$python\
+$java\
+$docker_context\
+$kubernetes\
+$cmd_duration\
+$line_break\
+$character"""
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+style = "bold blue"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+conflicted = "⚡"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+style = "bold red"
+
+[nodejs]
+symbol = " "
+detect_files = ["package.json", ".nvmrc", ".node-version"]
+style = "bold green"
+
+[python]
+symbol = " "
+detect_files = [".python-version", "requirements.txt", "pyproject.toml", "Pipfile"]
+style = "bold yellow"
+
+[java]
+symbol = " "
+detect_files = ["pom.xml", "build.gradle", ".java-version"]
+style = "bold red"
+
+[docker_context]
+symbol = " "
+only_with_files = true
+style = "bold blue"
+
+[kubernetes]
+disabled = false
+symbol = "☸ "
+style = "bold cyan"
+detect_files = ["k8s", "*.yaml", "*.yml", "Helm*", "Chart*"]
+
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration](bold yellow) "
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
