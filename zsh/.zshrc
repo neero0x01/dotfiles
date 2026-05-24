@@ -11,6 +11,7 @@ zinit light zsh-users/zsh-history-substring-search
 
 # ─── Completions ─────────────────────────────────────────────────────────────
 autoload -Uz compinit
+mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 
 # fzf-tab must be loaded after compinit
