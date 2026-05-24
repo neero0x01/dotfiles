@@ -79,6 +79,43 @@ UNIT
   ok "Monthly mirror refresh timer enabled"
 fi
 
+# ─── Timeshift ───────────────────────────────────────────────────────────────
+info "Configuring Timeshift snapshots..."
+ROOT_UUID=$(lsblk -o UUID,MOUNTPOINT | awk '$2=="/" {print $1}')
+sudo mkdir -p /etc/timeshift
+sudo tee /etc/timeshift/timeshift.json > /dev/null << TSJSON
+{
+  "backup_device_uuid" : "$ROOT_UUID",
+  "do_first_run" : "false",
+  "btrfs_mode" : "false",
+  "schedule_monthly" : "true",
+  "schedule_weekly" : "false",
+  "schedule_daily" : "false",
+  "schedule_hourly" : "false",
+  "schedule_boot" : "false",
+  "count_monthly" : "3",
+  "count_weekly" : "0",
+  "count_daily" : "0",
+  "count_hourly" : "0",
+  "count_boot" : "0",
+  "exclude" : [
+    "+ /root/**",
+    "+ /home/**",
+    "- /home/*/.cache/**",
+    "- /home/*/Downloads/**",
+    "- /home/*/.local/share/Trash/**",
+    "- /home/*/.npm/**",
+    "- /home/*/.m2/**",
+    "- /home/*/.gradle/**",
+    "- /var/cache/pacman/pkg/**",
+    "- /tmp/**",
+    "- /var/tmp/**"
+  ],
+  "exclude-apps" : []
+}
+TSJSON
+ok "Timeshift configured (run 'sudo timeshift --create' for first snapshot)"
+
 # ─── mise (Node + Python) ────────────────────────────────────────────────────
 if ! command -v mise &>/dev/null && [[ ! -f "$HOME/.local/bin/mise" ]]; then
   info "Installing mise..."

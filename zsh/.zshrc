@@ -107,6 +107,10 @@ alias lg='lazygit'
 # ─── gh ──────────────────────────────────────────────────────────────────────
 command -v gh &>/dev/null && eval "$(gh completion -s zsh)"
 
+# ─── System maintenance ──────────────────────────────────────────────────────
+# snapshot + full system update in one command
+alias sysupdate='sudo timeshift --create --comments "pre-update $(date +%Y-%m-%d)" --tags D && sudo pacman -Syu'
+
 # ─── Dynamic completions ─────────────────────────────────────────────────────
 command -v kubectl &>/dev/null && source <(kubectl completion zsh)
 command -v docker  &>/dev/null && source <(docker completion zsh)
