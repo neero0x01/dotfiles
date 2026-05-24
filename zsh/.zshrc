@@ -7,6 +7,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light Aloxaf/fzf-tab
+zinit light zsh-users/zsh-history-substring-search
 
 # ─── Completions ─────────────────────────────────────────────────────────────
 autoload -Uz compinit
@@ -24,6 +25,14 @@ HISTSIZE=50000
 SAVEHIST=50000
 setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_SPACE SHARE_HISTORY AUTO_CD
+
+# history-substring-search keybindings (must be set after plugin loads)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
 
 # ─── fzf ─────────────────────────────────────────────────────────────────────
 eval "$(fzf --zsh)"
