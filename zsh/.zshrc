@@ -3,10 +3,9 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [[ ! -d $ZINIT_HOME ]] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# ─── Plugins ─────────────────────────────────────────────────────────────────
+# ─── Plugins (order matters) ─────────────────────────────────────────────────
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-history-substring-search
 
 # ─── Completions ─────────────────────────────────────────────────────────────
@@ -14,7 +13,9 @@ autoload -Uz compinit
 mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 
-# fzf-tab must be loaded after compinit
+# fzf-tab MUST load after compinit
+zinit light Aloxaf/fzf-tab
+
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always --icons=always $realpath'
@@ -36,7 +37,10 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
 
 # ─── fzf ─────────────────────────────────────────────────────────────────────
+# Load fzf shell integration (ctrl+r, ctrl+t, alt+c)
+# ^I (tab) is intentionally left to fzf-tab above
 eval "$(fzf --zsh)"
+bindkey '^I' fzf-tab-complete
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse --border --bind='ctrl-/:toggle-preview'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
