@@ -9,7 +9,7 @@ warn()  { echo -e "\033[1;33m[WARN]\033[0m  $*"; }
 
 # ─── System packages ─────────────────────────────────────────────────────────
 info "Installing system packages..."
-sudo pacman -S --needed --noconfirm stow fzf eza zoxide base-devel curl wget git
+sudo pacman -S --needed --noconfirm stow fzf eza zoxide base-devel curl wget git ttf-jetbrains-mono-nerd
 ok "System packages ready"
 
 # ─── Performance tweaks ──────────────────────────────────────────────────────
