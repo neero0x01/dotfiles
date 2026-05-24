@@ -13,7 +13,7 @@ sudo pacman -S --needed --noconfirm \
   stow fzf eza zoxide base-devel curl wget git \
   ttf-jetbrains-mono-nerd \
   docker docker-compose kubectl helm k9s \
-  ripgrep bat fd github-cli lazygit git-delta
+  ripgrep bat fd github-cli lazygit git-delta tldr
 ok "System packages ready"
 
 info "Enabling Docker..."

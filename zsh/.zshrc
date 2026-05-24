@@ -107,6 +107,12 @@ alias lg='lazygit'
 # ─── gh ──────────────────────────────────────────────────────────────────────
 command -v gh &>/dev/null && eval "$(gh completion -s zsh)"
 
+# ─── tldr ────────────────────────────────────────────────────────────────────
+export TLDR_COLOR_NAME="cyan"
+export TLDR_COLOR_DESCRIPTION="white"
+export TLDR_COLOR_EXAMPLE="green"
+export TLDR_COLOR_COMMAND="red"
+
 # ─── System maintenance ──────────────────────────────────────────────────────
 # snapshot + full system update in one command
 alias sysupdate='sudo timeshift --create --comments "pre-update $(date +%Y-%m-%d)" --tags D && sudo pacman -Syu'
