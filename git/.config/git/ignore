@@ -45,3 +45,5 @@ target/
 *.bak
 *.swp
 .direnv/
+
+**/.claude/settings.local.json
