@@ -154,10 +154,10 @@ for f in ~/.zshrc ~/.gitconfig; do
   fi
 done
 
-mkdir -p ~/.config/git ~/.config/mise
+mkdir -p ~/.config/git ~/.config/mise ~/.config/nvim
 
 cd "$DOTFILES_DIR"
-for module in zsh mise git starship; do
+for module in zsh mise git starship nvim; do
   stow -v --restow "$module"
   ok "stowed: $module"
 done
