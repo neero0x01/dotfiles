@@ -3,5 +3,6 @@ experimental = true
 
 # Global tool versions — override per project with a local .mise.toml
 [tools]
+go = "latest"
 node = "lts"
 python = "3.12"
