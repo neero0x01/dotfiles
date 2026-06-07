@@ -8,6 +8,7 @@ Personal dotfiles for Manjaro/Arch Linux, managed with [GNU Stow](https://www.gn
 |---|---|---|
 | `zsh` | Zsh + [Zinit](https://github.com/zdharma-continuum/zinit) | Autosuggestions, syntax highlighting, fzf-tab, history search |
 | `kitty` | [Kitty](https://sw.kovidgoyal.net/kitty/) | Split panes, powerline tabs, Catppuccin Mocha |
+| `ghostty` | [Ghostty](https://ghostty.org/) | GPU-accelerated terminal, splits, Catppuccin Mocha |
 | `starship` | [Starship](https://starship.rs/) | Two-line prompt, git status, language versions, time |
 | `bat` | [bat](https://github.com/sharkdp/bat) | Replaces `cat`, Catppuccin Mocha theme |
 | `ripgrep` | [ripgrep](https://github.com/BurntSushi/ripgrep) | Smart-case, searches hidden files, common dirs excluded |
@@ -40,6 +41,7 @@ If you only want specific configs, stow individual modules:
 cd ~/dotfiles
 stow zsh        # ~/.zshrc
 stow kitty      # ~/.config/kitty/
+stow ghostty    # ~/.config/ghostty/
 stow starship   # ~/.config/starship.toml
 stow bat        # ~/.config/bat/
 stow ripgrep    # ~/.config/ripgrep/
@@ -88,6 +90,18 @@ sysupdate               → timeshift snapshot + pacman -Syu
 - **Zoom pane:** `Ctrl+Shift+Z` (toggle fullscreen for current split)
 - **Cycle layouts:** `Ctrl+Shift+Space`
 - **New tab:** `Ctrl+Shift+T` | **Close tab:** `Ctrl+Shift+W`
+- **Switch tabs:** `Ctrl+Alt+1–5`
+- **Font size:** `Ctrl+=` / `Ctrl+-` / `Ctrl+Shift+Backspace` (reset)
+
+## Ghostty features
+
+GPU-accelerated terminal, trialed alongside Kitty with a matching Catppuccin Mocha look and the same keybinding muscle memory where Ghostty supports it (no named-layout system, so layout cycling has no equivalent here).
+
+- **Splits:** `Ctrl+Shift+D` (right) / `Ctrl+Shift+E` (down)
+- **Navigate splits:** `Ctrl+Shift+H/J/K/L`
+- **Resize splits:** `Ctrl+Shift+Arrow keys`
+- **Zoom pane:** `Ctrl+Shift+Z` (toggle zoom for current split)
+- **New tab:** `Ctrl+Shift+T` | **Close:** `Ctrl+Shift+W`
 - **Switch tabs:** `Ctrl+Alt+1–5`
 - **Font size:** `Ctrl+=` / `Ctrl+-` / `Ctrl+Shift+Backspace` (reset)
 

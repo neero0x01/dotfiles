@@ -1,0 +1,51 @@
+# ─── Font ────────────────────────────────────────────────────────────────────
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 12
+
+# ─── Cursor ──────────────────────────────────────────────────────────────────
+cursor-style = bar
+cursor-style-blink = false
+
+# ─── Window ──────────────────────────────────────────────────────────────────
+background-opacity = 0.96
+window-padding-x = 10
+window-padding-y = 10
+window-decoration = true
+confirm-close-surface = false
+
+# ─── Theme ───────────────────────────────────────────────────────────────────
+theme = Catppuccin Mocha
+
+# ─── Keybindings (mirrors Kitty's setup where Ghostty has an equivalent) ─────
+# Splits (like Tilix)
+keybind = ctrl+shift+d=new_split:right
+keybind = ctrl+shift+e=new_split:down
+
+# Navigate between splits
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+l=goto_split:right
+keybind = ctrl+shift+k=goto_split:up
+keybind = ctrl+shift+j=goto_split:down
+
+# Resize splits
+keybind = ctrl+shift+left=resize_split:left,30
+keybind = ctrl+shift+right=resize_split:right,30
+keybind = ctrl+shift+up=resize_split:up,30
+keybind = ctrl+shift+down=resize_split:down,30
+
+# Tabs
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+w=close_surface
+keybind = ctrl+alt+1=goto_tab:1
+keybind = ctrl+alt+2=goto_tab:2
+keybind = ctrl+alt+3=goto_tab:3
+keybind = ctrl+alt+4=goto_tab:4
+keybind = ctrl+alt+5=goto_tab:5
+
+# Zoom toggle (like Tilix maximize pane)
+keybind = ctrl+shift+z=toggle_split_zoom
+
+# Font size
+keybind = ctrl+equal=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+shift+backspace=reset_font_size

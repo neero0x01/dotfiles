@@ -12,6 +12,7 @@ info "Installing system packages..."
 sudo pacman -S --needed --noconfirm \
   stow fzf eza zoxide base-devel curl wget git \
   ttf-jetbrains-mono-nerd \
+  ghostty \
   docker docker-compose kubectl helm k9s \
   ripgrep bat fd github-cli lazygit git-delta tldr
 ok "System packages ready"
@@ -154,10 +155,10 @@ for f in ~/.zshrc ~/.gitconfig; do
   fi
 done
 
-mkdir -p ~/.config/git ~/.config/mise ~/.config/nvim
+mkdir -p ~/.config/git ~/.config/mise ~/.config/nvim ~/.config/ghostty
 
 cd "$DOTFILES_DIR"
-for module in zsh mise git starship nvim; do
+for module in zsh mise git starship nvim ghostty; do
   stow -v --restow "$module"
   ok "stowed: $module"
 done
