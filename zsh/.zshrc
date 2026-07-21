@@ -96,6 +96,11 @@ export PATH="$PNPM_HOME:$PATH"
 # ─── PATH ────────────────────────────────────────────────────────────────────
 export PATH="$HOME/.local/bin:$PATH"
 
+# ─── flutter / android ───────────────────────────────────────────────────────
+export PATH="$PATH:$HOME/fvm/default/bin"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator"
+
 # ─── bat ─────────────────────────────────────────────────────────────────────
 export BAT_THEME="Catppuccin Mocha"
 alias cat='bat --paging=never'
@@ -130,3 +135,16 @@ command -v helm    &>/dev/null && source <(helm completion zsh)
 # ─── sdkman (must remain last) ───────────────────────────────────────────────
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# ─── Java 17 override (NowKit requires 17, overrides sdkman's Java 21) ───────
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# ─── .NET global tools ────────────────────────────────────────────────────────
+export PATH="$PATH:$HOME/.dotnet/tools"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
